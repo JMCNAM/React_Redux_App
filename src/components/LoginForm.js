@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import { Card, CardSection, Input, Button } from "./common";
 import { connect } from 'react-redux';
-import { emailChanged } from '../actions'; // Action creator.
+import { 
+    emailChanged, 
+    passwordChanged,
+    loginUser
+ } from '../actions'; // Action creators.
 
 class LoginForm extends Component {
     // Event handler calls action creator with new text.
     onEmailChange(text){
-        console.log(this.props);
+        // console.log(this.props);
         this.props.emailChanged(text);
     }
+    // Event handler for password input.
+    onPasswordChange(text){
+        this.props.passwordChanged(text);
+    }
+    onButtonPress(){
+        // LoginUser action expects object with props.
+        const { email, password } = this.props;
+        this.props.loginUser({email, password});
+    }
+
     render(){
         return(
             <Card>
@@ -25,10 +39,14 @@ class LoginForm extends Component {
                         secureTextEntry
                         label='Password:'
                         placeholder='password'
+                        value={this.props.password}
+                        onChangeText={this.onPasswordChange.bind(this)}
                     />
                 </CardSection>
                 <CardSection>
-                    <Button>
+                    <Button
+                        onPress={this.onButtonPress.bind(this)}
+                        >
                         Login
                     </Button>
                 </CardSection>
@@ -38,8 +56,11 @@ class LoginForm extends Component {
 }
 const mapStateToProps = state => {
     return { // Gives component access to this.props.email.
-        email: state.auth.email
+        email: state.auth.email,
+        password: state.auth.password
     }
 }
 // Wired up action creator function to this LoginForm component.
-export default connect(mapStateToProps, { emailChanged })(LoginForm);
+export default connect(mapStateToProps, {
+     emailChanged, passwordChanged, loginUser
+     })(LoginForm);
