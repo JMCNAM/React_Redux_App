@@ -6,7 +6,7 @@ import {
     View
   } from 'react-native';
 import { createStore } from 'redux';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 import reducers from './reducers';
 import LoginForm from './components/LoginForm';
 
@@ -15,6 +15,7 @@ import LoginForm from './components/LoginForm';
 
     componentWillMount(){
         console.log('App component will mount');
+        const firebase = require("firebase");// Fix for firebase import.
         // Initialize Firebase
           const config = {
               apiKey: 'AIzaSyCHX3Fum0rZf0DooWibB2pUDtwUl-yum3Q',
@@ -30,21 +31,8 @@ import LoginForm from './components/LoginForm';
     render() {
         return (
           <Provider store={createStore(reducers)}>
-            <View style={styles.container}>
-              <Text style={styles.welcome}>
-                Welcome to React Native!
-            </Text>
-              <Text style={styles.instructions}>
-                To get started, edit App.js
-            </Text>
-              <Text style={styles.instructions}>
-                Login Form
-              </Text>
               <LoginForm />
-            </View>
           </Provider>
-
-
         );
     }
 }
