@@ -10,7 +10,7 @@ import {
 
 class LoginForm extends Component {
     onEmailChange(text){
-        // console.log(this.props);
+
         this.props.emailChanged(text);
     };
     onPasswordChange(text){
@@ -22,7 +22,6 @@ class LoginForm extends Component {
         this.props.loginUser({email, password});
     };
     renderButton(){
-        console.log('Rendering Button: '+ this.props.loading);
         if (this.props.loading){
             console.log('Rendering Spinner: '+ this.props.loading);
             return <Spinner size="large"/>;

@@ -15,15 +15,13 @@ const INITIAL_STATE = {
 }
 // Function with 2 args.
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
-        case EMAIL_CHANGED:
-        // console.log('Action fired.'); // debugging helper.           
+        case EMAIL_CHANGED:       
             return { ...state, email: action.payload } // Updated state.
         case PASSWORD_CHANGED:
             return { ...state, password: action.payload }
         case LOGIN_USER_START:
-        console.log("Loading");
             return { 
                 ...state, 
                 loading: true, 
